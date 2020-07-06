@@ -9,6 +9,8 @@
     <PackageId>MobileDocKit</PackageId>
     <Version>0.1.0</Version>
     <Authors>Willem Meints</Authors>
+    <PackageDescription>Mobiledoc parser/rendering library for .NET Core.</PackageDescription>
+    <RepositoryUrl>https://github.com/wmeints/mobiledoc-kit-dotnet/</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
