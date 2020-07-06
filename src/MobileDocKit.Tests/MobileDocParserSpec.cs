@@ -119,7 +119,8 @@ namespace MobileDocRenderer.Tests
 
             result.Markups.Should().NotBeEmpty();
             result.Markups.First().Name.Should().Be("a");
-            result.Markups.First().Attributes.Should().Contain(x => x.Name == "href" && x.Value == "https://google.nl");
+            result.Markups.First().Attributes.Should().Contain(
+                x => x.Name == "href" && x.Value == "https://google.nl");
         }
 
         [Fact]
