@@ -24,4 +24,4 @@ jobs:
     - name: Test
       run: dotnet test src/MobileDocKit.sln --no-restore --verbosity normal
     - name: Package
-      run: dotnet package src/MobileDocKit/MobileDocKit.csproj -c Release -o packages/
+      run: dotnet pack src/MobileDocKit/MobileDocKit.csproj -c Release -o packages/
