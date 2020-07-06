@@ -89,6 +89,32 @@ namespace MobileDocRenderer
             
         }
 
+        public void EnterCards(IEnumerable<CardType> cardTypes)
+        {
+            _jsonWriter.WritePropertyName("cards");
+            _jsonWriter.WriteStartArray();
+        }
+
+        public void ExitCards(IEnumerable<CardType> cardTypes)
+        {
+            _jsonWriter.WriteEndArray();
+        }
+
+        public void EnterCard(CardType cardType)
+        {
+            _jsonWriter.WriteStartArray();
+            _jsonWriter.WriteValue(cardType.Name);
+            
+            cardType.Payload.WriteTo(_jsonWriter);
+            
+            _jsonWriter.WriteEndArray();
+        }
+
+        public void ExitCard(CardType cardType)
+        {
+            
+        }
+
         public void EnterSections(IEnumerable<Section> mobileDocSections)
         {
             _jsonWriter.WritePropertyName("sections");

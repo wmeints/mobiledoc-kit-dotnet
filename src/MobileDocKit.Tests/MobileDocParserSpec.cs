@@ -103,5 +103,42 @@ namespace MobileDocRenderer.Tests
             result.Atoms.First().Text.Should().Be("Awesomeness");
             result.Atoms.First().Payload["test"].Value<string>().Should().Be("test");
         }
+
+        [Fact]
+        public void CanParseMarkups()
+        {
+            var document = new MobileDocBuilder()
+                .WithMarkup(markup => markup.WithTagName("a").WithAttribute("href", "https://google.nl"))
+                .WithMarkupSection(section => section
+                    .WithTagName("p")
+                    .WithMarkupMarker(new int[] { 0}, 1, "Test link"))
+                .Build();
+            
+            var parser = new MobileDocParser(MobileDocSerializer.Serialize(document));
+            var result = parser.MobileDoc();
+
+            result.Markups.Should().NotBeEmpty();
+            result.Markups.First().Name.Should().Be("a");
+            result.Markups.First().Attributes.Should().Contain(x => x.Name == "href" && x.Value == "https://google.nl");
+        }
+
+        [Fact]
+        public void CanParseCards()
+        {
+            var document = new MobileDocBuilder()
+                .WithCard(card => card
+                    .WithName("markdown")
+                    .WithPayload(JObject.FromObject(new { text = "# Heading 1"})))
+                .WithMarkupSection(section => section
+                    .WithTagName("p")
+                    .WithMarkupMarker(new int[] { },0,"Hello world"))
+                .Build();
+            
+            var parser = new MobileDocParser(MobileDocSerializer.Serialize(document));
+            var result = parser.MobileDoc();
+
+            result.Cards.Should().NotBeEmpty();
+            result.Cards.First().Name.Should().Be("markdown");
+        }
     }
 }

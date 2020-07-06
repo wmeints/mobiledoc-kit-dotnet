@@ -66,6 +66,30 @@ namespace MobileDocRenderer
         /// </summary>
         /// <param name="atom"></param>
         void ExitAtom(AtomType atom);
+
+        /// <summary>
+        /// Called before cards are processed
+        /// </summary>
+        /// <param name="cardTypes"></param>
+        void EnterCards(IEnumerable<CardType> cardTypes);
+
+        /// <summary>
+        /// Called after cards are processed
+        /// </summary>
+        /// <param name="cardTypes"></param>
+        void ExitCards(IEnumerable<CardType> cardTypes);
+
+        /// <summary>
+        /// Called before processing a card
+        /// </summary>
+        /// <param name="cardType"></param>
+        void EnterCard(CardType cardType);
+
+        /// <summary>
+        /// Called after processing a card
+        /// </summary>
+        /// <param name="cardType"></param>
+        void ExitCard(CardType cardType);
         
         /// <summary>
         /// Called before sections are processed.

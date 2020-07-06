@@ -43,6 +43,17 @@ namespace MobileDocRenderer
             }
 
             listener.ExitAtoms(mobileDoc.Atoms);
+
+            listener.EnterCards(mobileDoc.Cards);
+
+            foreach (var card in mobileDoc.Cards)
+            {
+                listener.EnterCard(card);
+                listener.ExitCard(card);
+            }
+            
+            listener.ExitCards(mobileDoc.Cards);
+            
             listener.EnterSections(mobileDoc.Sections);
 
             foreach (var section in mobileDoc.Sections)

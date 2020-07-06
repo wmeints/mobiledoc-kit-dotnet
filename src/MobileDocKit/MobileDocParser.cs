@@ -138,8 +138,10 @@ namespace MobileDocRenderer
             _jsonReader.Match(JsonToken.StartArray);
 
             var cardName = (string)_jsonReader.Match(JsonToken.String);
+            
             var payload = JObject.Load(_jsonReader);
-
+            _jsonReader.Match(JsonToken.EndObject);
+            
             _jsonReader.Match(JsonToken.EndArray);
 
             _cards.Add(new CardType(cardName, payload));

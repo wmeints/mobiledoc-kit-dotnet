@@ -102,7 +102,7 @@ namespace MobileDocRenderer
 
             while (jsonReader.TokenType != JsonToken.EndArray)
             {
-                indices.Add((int)jsonReader.Match(JsonToken.Integer));
+                indices.Add((int)(long)jsonReader.Match(JsonToken.Integer));
             }
 
             jsonReader.Match(JsonToken.EndArray);
