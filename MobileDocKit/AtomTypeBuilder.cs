@@ -1,5 +1,4 @@
-﻿using System.Text.Json;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 
 namespace MobileDocRenderer
 {

@@ -1,5 +1,4 @@
-﻿using System.Text.Json;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 
 namespace MobileDocRenderer
 {
@@ -32,7 +31,7 @@ namespace MobileDocRenderer
             _payload = payload;
             return this;
         }
-        
+
         /// <summary>
         /// Creates the instance of the <see cref="CardType"/>.
         /// </summary>

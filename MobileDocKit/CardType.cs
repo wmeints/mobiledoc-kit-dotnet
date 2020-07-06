@@ -1,5 +1,4 @@
-﻿using System.Text.Json;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 
 namespace MobileDocRenderer
 {
@@ -23,7 +22,7 @@ namespace MobileDocRenderer
         /// Gets the name of the card
         /// </summary>
         public string Name { get; }
-        
+
         /// <summary>
         /// Gets the payload for the card
         /// </summary>

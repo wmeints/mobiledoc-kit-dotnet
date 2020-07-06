@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Text.Json;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -30,11 +28,11 @@ namespace MobileDocRenderer
         /// <param name="sectionParsers">Parsers to use for processing sections</param>
         public MobileDocParser(string text)
         {
-            _sectionParsers = new []
+            _sectionParsers = new[]
             {
                 new MarkupSectionParser()
             };
-            
+
             _jsonReader = new JsonTextReader(new StringReader(text));
             _sections = new List<Section>();
             _atoms = new List<AtomType>();
@@ -53,31 +51,31 @@ namespace MobileDocRenderer
 
             while (_jsonReader.TokenType != JsonToken.EndObject)
             {
-                if (_jsonReader.TokenType == JsonToken.PropertyName && (string) _jsonReader.Value == "version")
+                if (_jsonReader.TokenType == JsonToken.PropertyName && (string)_jsonReader.Value == "version")
                 {
                     ParseVersion();
                     continue;
                 }
 
-                if (_jsonReader.TokenType == JsonToken.PropertyName && (string) _jsonReader.Value == "sections")
+                if (_jsonReader.TokenType == JsonToken.PropertyName && (string)_jsonReader.Value == "sections")
                 {
                     ParseSections();
                     continue;
                 }
 
-                if (_jsonReader.TokenType == JsonToken.PropertyName && (string) _jsonReader.Value == "markups")
+                if (_jsonReader.TokenType == JsonToken.PropertyName && (string)_jsonReader.Value == "markups")
                 {
                     ParseMarkups();
                     continue;
                 }
 
-                if (_jsonReader.TokenType == JsonToken.PropertyName && (string) _jsonReader.Value == "atoms")
+                if (_jsonReader.TokenType == JsonToken.PropertyName && (string)_jsonReader.Value == "atoms")
                 {
                     ParseAtoms();
                     continue;
                 }
 
-                if (_jsonReader.TokenType == JsonToken.PropertyName && (string) _jsonReader.Value == "cards")
+                if (_jsonReader.TokenType == JsonToken.PropertyName && (string)_jsonReader.Value == "cards")
                 {
                     ParseCards();
                 }
@@ -90,7 +88,7 @@ namespace MobileDocRenderer
         {
             _jsonReader.Match(JsonToken.PropertyName);
 
-            _version = (string) _jsonReader.Value;
+            _version = (string)_jsonReader.Value;
             _jsonReader.Match(JsonToken.String);
         }
 
@@ -111,12 +109,12 @@ namespace MobileDocRenderer
         {
             _jsonReader.Match(JsonToken.StartArray);
 
-            var atomName = (string) _jsonReader.Match(JsonToken.String);
-            var atomText = (string) _jsonReader.Match(JsonToken.String);
+            var atomName = (string)_jsonReader.Match(JsonToken.String);
+            var atomText = (string)_jsonReader.Match(JsonToken.String);
 
             var payload = JObject.Load(_jsonReader);
             _jsonReader.Match(JsonToken.EndObject);
-            
+
             _jsonReader.Match(JsonToken.EndArray);
 
             _atoms.Add(new AtomType(atomName, atomText, payload));
@@ -139,7 +137,7 @@ namespace MobileDocRenderer
         {
             _jsonReader.Match(JsonToken.StartArray);
 
-            var cardName = (string) _jsonReader.Match(JsonToken.String);
+            var cardName = (string)_jsonReader.Match(JsonToken.String);
             var payload = JObject.Load(_jsonReader);
 
             _jsonReader.Match(JsonToken.EndArray);
@@ -164,7 +162,7 @@ namespace MobileDocRenderer
         {
             _jsonReader.Match(JsonToken.StartArray);
 
-            var tagName = (string) _jsonReader.Match(JsonToken.String);
+            var tagName = (string)_jsonReader.Match(JsonToken.String);
             var attributes = new List<MarkupAttribute>();
 
             if (_jsonReader.TokenType == JsonToken.StartArray)
@@ -173,8 +171,8 @@ namespace MobileDocRenderer
 
                 while (_jsonReader.TokenType != JsonToken.EndArray)
                 {
-                    var attributeName = (string) _jsonReader.Match(JsonToken.String);
-                    var attributeValue = (string) _jsonReader.Match(JsonToken.String);
+                    var attributeName = (string)_jsonReader.Match(JsonToken.String);
+                    var attributeValue = (string)_jsonReader.Match(JsonToken.String);
 
                     attributes.Add(new MarkupAttribute(attributeName, attributeValue));
                 }
@@ -206,7 +204,7 @@ namespace MobileDocRenderer
         private void ParseSection()
         {
             _jsonReader.Match(JsonToken.StartArray);
-            var sectionType = (int) (long) _jsonReader.Match(JsonToken.Integer);
+            var sectionType = (int)(long)_jsonReader.Match(JsonToken.Integer);
 
             var sectionContentParser = _sectionParsers.FirstOrDefault(
                 x => x.SectionType == sectionType);

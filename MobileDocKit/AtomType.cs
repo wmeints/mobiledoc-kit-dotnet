@@ -1,9 +1,8 @@
-﻿using System.Text.Json;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 
 namespace MobileDocRenderer
 {
-    
+
     /// <summary>
     /// Defines an atom type for a mobiledoc
     /// </summary>
@@ -26,12 +25,12 @@ namespace MobileDocRenderer
         /// Gets the name of the atom
         /// </summary>
         public string Name { get; }
-        
+
         /// <summary>
         /// Gets the text for the atom
         /// </summary>
         public string Text { get; }
-        
+
         /// <summary>
         /// Gets the payload for the atom
         /// </summary>
