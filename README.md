@@ -25,15 +25,50 @@ To use the library, add the following package reference to your `.csproj` file:
 
 You can now parse Mobiledoc with the following code:
 
-```
+```csharp
 var doc = MobileDocSerializer.Deserialize(someDocumentContent);
+```
+
+Similarly, you can serialize mobiledoc content using the following code:
+
+```csharp
+MobileDocSerializer.Serialize(mobileDocContent);
+```
+
+If you're looking to create mobiledoc content programmatically, 
+you can build a mobiledoc document using the builder interface:
+
+```csharp
+var document = new MobileDocBuilder()
+    .WithMarkupSection(section => section
+        .WithTagName("p")
+        .WithMarker(new int[] { }, 0, "Hello world"))
+    .Build();
 ```
 
 ## Learning more about mobiledoc
 
-You can learn more about the mobiledoc format here: https://github.com/bustle/mobiledoc-kit/blob/master/MOBILEDOC.md
+You can learn more about the mobiledoc format in 
+[the official specification](https://github.com/bustle/mobiledoc-kit/blob/master/MOBILEDOC.md). 
 
 ## Developing
 
-TODO: Describe how to change elements in the code.
+### Recommended developer tooling
+
+* Windows/Linux/Mac
+* .NET Core SDK 3.1
+* Visual Studio Code/Visual Studio 2019/Rider 2020.1
+
+### Setting up your development environment
+
+You don't need anything special on your machine, aside from the .NET Core SDK
+and a code editor.
+
+### Running tests
+
+You can run tests using the following command:
+
+```shell
+dotnet test src/MobileDocKit.Tests/MobileDocKit.Tests.csproj
+```
 
