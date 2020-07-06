@@ -1,6 +1,6 @@
 # Mobiledoc kit for .NET Core
 
-![Build](https://github.com/wmeints/mobiledoc-kit-dotnet/workflows/Build/badge.svg)
+[![Build](https://github.com/wmeints/mobiledoc-kit-dotnet/workflows/Build/badge.svg)](https://github.com/wmeints/mobiledoc-kit-dotnet/actions?query=workflow%3ABuild)
 
 Mobiledoc Kit for .NET Core is a C# implementation of the mobiledoc format.
 It supports the following features:
