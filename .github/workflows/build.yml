@@ -26,4 +26,6 @@ jobs:
     - name: Package
       run: dotnet pack src/MobileDocKit/MobileDocKit.csproj -c Release -o packages/
     - name: Publish package
-      run: dotnet nuget push "packages/*.nupkg" --source "github" -k ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        dotnet nuget add source -n github -u wmeints -p ${{ secrets.GITHUB_TOKEN }}
+        dotnet nuget push "packages/*.nupkg" --source "github" -k ${{ secrets.GITHUB_TOKEN }}
