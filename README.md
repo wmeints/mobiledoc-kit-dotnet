@@ -27,6 +27,11 @@ You can now parse Mobiledoc with the following code:
 var doc = MobileDocSerializer.Deserialize(someDocumentContent);
 ```
 
+## Learning more about mobiledoc
+
+You can learn more about the mobiledoc format here: https://github.com/bustle/mobiledoc-kit/blob/master/MOBILEDOC.md
+
 ## Developing
 
 TODO: Describe how to change elements in the code.
+
