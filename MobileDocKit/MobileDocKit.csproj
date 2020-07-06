@@ -5,9 +5,14 @@
     <RootNamespace>MobileDocRenderer</RootNamespace>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <PackageId>MobileDocKit</PackageId>
+    <Version>0.1.0</Version>
+    <Authors>Willem Meints</Authors>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-    <PackageReference Include="System.Text.Json" Version="4.7.2" />
   </ItemGroup>
 
 </Project>
