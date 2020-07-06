@@ -20,6 +20,8 @@ jobs:
     - name: Install dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build --configuration Release --no-restore
+      run: dotnet build src/MobileDocKit.sln --configuration Release --no-restore
     - name: Test
-      run: dotnet test --no-restore --verbosity normal
+      run: dotnet test src/MobileDocKit.sln --no-restore --verbosity normal
+    - name: Package
+      run: dotnet package src/MobileDocKit/MobileDocKit.csproj -c Release -o packages/
