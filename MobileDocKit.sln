@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobileDocRenderer", "MobileDocRenderer\MobileDocRenderer.csproj", "{679CD09C-BCB3-4AE8-A62A-D9EC27500B01}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobileDocKit", "MobileDocKit\MobileDocKit.csproj", "{679CD09C-BCB3-4AE8-A62A-D9EC27500B01}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobileDocRenderer.Tests", "MobileDocRenderer.Tests\MobileDocRenderer.Tests.csproj", "{6CE775EC-088F-4D6D-8698-695983D0C2AD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobileDocKit.Tests", "MobileDocKit.Tests\MobileDocKit.Tests.csproj", "{6CE775EC-088F-4D6D-8698-695983D0C2AD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
