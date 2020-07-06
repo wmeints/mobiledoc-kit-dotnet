@@ -17,16 +17,16 @@ namespace MobileDocRenderer
         /// <summary>
         /// Parses the JSON element into a specific section
         /// </summary>
-        /// <param name="reader">JSON reader content to parse</param>
+        /// <param name="jsonReader">JSON reader content to parse</param>
         /// <returns>Returns the parsed section</returns>
-        public override Section Parse(JsonReader reader)
+        public override Section Parse(JsonReader jsonReader)
         {
-            var tagName = (string)reader.Match(JsonToken.String);
-            var markers = ParseMarkers(reader);
+            var tagName = (string)jsonReader.Match(JsonToken.String);
+            var markers = ParseMarkers(jsonReader);
 
-            if (reader.TokenType == JsonToken.StartArray)
+            if (jsonReader.TokenType == JsonToken.StartArray)
             {
-                var attributes = ParseAttributes(reader);
+                var attributes = ParseAttributes(jsonReader);
                 return new MarkupSection(tagName, markers, attributes);
             }
 

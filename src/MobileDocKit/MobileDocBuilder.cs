@@ -27,6 +27,21 @@ namespace MobileDocRenderer
 
             return this;
         }
+        
+        /// <summary>
+        /// Adds a card section to the document.
+        /// </summary>
+        /// <param name="sectionBuilder">Section building action.</param>
+        /// <returns>Returns the mobiledoc builder instance.</returns>
+        public MobileDocBuilder WithCardSection(Action<CardSectionBuilder> sectionBuilder)
+        {
+            var cardSectionBuilder = new CardSectionBuilder();
+            sectionBuilder(cardSectionBuilder);
+            
+            _sections.Add(cardSectionBuilder.Build());
+
+            return this;
+        }
 
         /// <summary>
         /// Attaches a new markup to the document.

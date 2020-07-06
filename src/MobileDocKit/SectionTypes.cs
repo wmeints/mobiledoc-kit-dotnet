@@ -9,5 +9,7 @@
         /// Markup section.
         /// </summary>
         public const int Markup = 1;
+
+        public static int Card = 10;
     }
 }

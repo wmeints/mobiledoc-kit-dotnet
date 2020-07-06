@@ -28,9 +28,10 @@ namespace MobileDocRenderer
         /// <param name="sectionParsers">Parsers to use for processing sections</param>
         public MobileDocParser(string text)
         {
-            _sectionParsers = new[]
+            _sectionParsers = new SectionParser[]
             {
-                new MarkupSectionParser()
+                new MarkupSectionParser(),
+                new CardSectionParser()
             };
 
             _jsonReader = new JsonTextReader(new StringReader(text));

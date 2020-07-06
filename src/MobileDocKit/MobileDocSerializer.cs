@@ -21,9 +21,10 @@ namespace MobileDocRenderer
         
             var documentListener = new MobileDocJsonTranslator(jsonWriter);
             
-            var sectionListeners = new[]
+            var sectionListeners = new ISectionListener[]
             {
-                new MarkupSectionJsonTranslator(jsonWriter)
+                new MarkupSectionJsonTranslator(jsonWriter),
+                new CardSectionJsonTranslator(jsonWriter)
             };
             
             var walker = new MobileDocWalker();
