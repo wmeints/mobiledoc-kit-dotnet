@@ -27,7 +27,7 @@ namespace MobileDocRenderer
             if (jsonReader.TokenType == JsonToken.StartArray)
             {
                 var attributes = ParseAttributes(jsonReader);
-                return new MarkupSection(tagName, markers, attributes);
+                return new ListSection(tagName, markers, attributes);
             }
 
             return new ListSection(tagName, markers, Enumerable.Empty<Attribute>());

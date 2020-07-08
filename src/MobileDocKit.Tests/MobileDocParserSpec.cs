@@ -17,13 +17,13 @@ namespace MobileDocRenderer.Tests
         {
             _output = output;
         }
-        
+
         [Fact]
         public void CanParseEmptyDocument()
         {
             var document = "{ \"version\": \"0.3.0\", \"sections\": [] }";
             var parser = new MobileDocParser(document);
-            
+
             var result = parser.MobileDoc();
 
             result.Version.Should().Be("0.3.0");
@@ -36,13 +36,13 @@ namespace MobileDocRenderer.Tests
             var document = new MobileDocBuilder()
                 .WithMarkupSection(section => section
                     .WithTagName("p")
-                    .WithMarkupMarker(new int[] { }, 0,"hello world"))
+                    .WithMarkupMarker(new int[] { }, 0, "hello world"))
                 .Build();
-        
+
             var parser = new MobileDocParser(MobileDocSerializer.Serialize(document));
-        
+
             var result = parser.MobileDoc();
-        
+
             result.Sections.Should().ContainSingle(x => x.SectionType == 1);
         }
 
@@ -55,11 +55,12 @@ namespace MobileDocRenderer.Tests
                     .WithMarkupMarker(new int[] { }, 0, "Hello world")
                     .WithAttribute("data-test", "test"))
                 .Build();
-            
+
             var parser = new MobileDocParser(MobileDocSerializer.Serialize(document));
             var result = parser.MobileDoc();
 
-            result.Sections.First().As<MarkupSection>().Markers.First().As<MarkupMarker>().Text.Should().Be("Hello world");
+            result.Sections.First().As<MarkupSection>().Markers.First().As<MarkupMarker>().Text.Should()
+                .Be("Hello world");
             result.Sections.First().As<MarkupSection>().Markers.First().OpenMarkupIndices.Should().BeEmpty();
             result.Sections.First().As<MarkupSection>().Markers.First().ClosedMarkups.Should().Be(0);
         }
@@ -73,7 +74,7 @@ namespace MobileDocRenderer.Tests
                     .WithMarkupMarker(new int[] { }, 0, "Hello world")
                     .WithAttribute("data-test", "test"))
                 .Build();
-            
+
             var parser = new MobileDocParser(MobileDocSerializer.Serialize(document));
             var result = parser.MobileDoc();
 
@@ -94,7 +95,7 @@ namespace MobileDocRenderer.Tests
                     .WithAtomMarker(new int[] { }, 0, 0)
                     .WithAttribute("data-test", "test"))
                 .Build();
-            
+
             var parser = new MobileDocParser(MobileDocSerializer.Serialize(document));
             var result = parser.MobileDoc();
 
@@ -111,9 +112,9 @@ namespace MobileDocRenderer.Tests
                 .WithMarkup(markup => markup.WithTagName("a").WithAttribute("href", "https://google.nl"))
                 .WithMarkupSection(section => section
                     .WithTagName("p")
-                    .WithMarkupMarker(new int[] { 0}, 1, "Test link"))
+                    .WithMarkupMarker(new int[] {0}, 1, "Test link"))
                 .Build();
-            
+
             var parser = new MobileDocParser(MobileDocSerializer.Serialize(document));
             var result = parser.MobileDoc();
 
@@ -129,12 +130,12 @@ namespace MobileDocRenderer.Tests
             var document = new MobileDocBuilder()
                 .WithCard(card => card
                     .WithName("markdown")
-                    .WithPayload(JObject.FromObject(new { text = "# Heading 1"})))
+                    .WithPayload(JObject.FromObject(new {text = "# Heading 1"})))
                 .WithMarkupSection(section => section
                     .WithTagName("p")
-                    .WithMarkupMarker(new int[] { },0,"Hello world"))
+                    .WithMarkupMarker(new int[] { }, 0, "Hello world"))
                 .Build();
-            
+
             var parser = new MobileDocParser(MobileDocSerializer.Serialize(document));
             var result = parser.MobileDoc();
 
@@ -148,10 +149,10 @@ namespace MobileDocRenderer.Tests
             var document = new MobileDocBuilder()
                 .WithCard(card => card
                     .WithName("markdown")
-                    .WithPayload(JObject.FromObject(new { text = "# Heading 1"})))
+                    .WithPayload(JObject.FromObject(new {text = "# Heading 1"})))
                 .WithCardSection(section => section.WithCardIndex(0))
                 .Build();
-            
+
             var parser = new MobileDocParser(MobileDocSerializer.Serialize(document));
             var result = parser.MobileDoc();
 
@@ -165,10 +166,11 @@ namespace MobileDocRenderer.Tests
             var document = new MobileDocBuilder()
                 .WithListSection(section => section
                     .WithListType("ol")
-                    .WithMarkupMarker(new int[] { }, 0, "Item 1")
-                    .WithAtomMarker(new int[] { }, 0, 0))
+                    .WithMarkupMarker(new int[] {0}, 1, "Item 1")
+                    .WithAtomMarker(new int[] { }, 0, 0)
+                    .WithAttribute("class", "test"))
                 .Build();
-            
+
             var parser = new MobileDocParser(MobileDocSerializer.Serialize(document));
             var result = parser.MobileDoc();
 
