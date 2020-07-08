@@ -174,8 +174,23 @@ namespace MobileDocRenderer.Tests
             var parser = new MobileDocParser(MobileDocSerializer.Serialize(document));
             var result = parser.MobileDoc();
 
-            result.Sections.Should().ContainSingle(x => x.SectionType == 3);
+            result.Sections.Should().ContainSingle(x => x.SectionType == SectionTypes.List);
             result.Sections.First().As<ListSection>().Markers.Should().NotBeEmpty();
+        }
+
+        [Fact]
+        public void CanParseImageSections()
+        {
+            var document = new MobileDocBuilder()
+                .WithImageSection(section => section
+                    .WithUrl("/images/image.png"))
+                .Build();
+            
+            var parser = new MobileDocParser(MobileDocSerializer.Serialize(document));
+            var result = parser.MobileDoc();
+
+            result.Sections.Should().ContainSingle(x => x.SectionType == SectionTypes.Image);
+            result.Sections.First().As<ImageSection>().Url.Should().Be("/images/image.png");
         }
     }
 }

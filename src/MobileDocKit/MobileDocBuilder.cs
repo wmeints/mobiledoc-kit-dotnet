@@ -8,10 +8,10 @@ namespace MobileDocRenderer
     /// </summary>
     public class MobileDocBuilder
     {
-        private List<Section> _sections = new List<Section>();
-        private List<MarkupType> _markups = new List<MarkupType>();
-        private List<CardType> _cardTypes = new List<CardType>();
-        private List<AtomType> _atomTypes = new List<AtomType>();
+        private readonly List<Section> _sections = new List<Section>();
+        private readonly List<MarkupType> _markups = new List<MarkupType>();
+        private readonly List<CardType> _cardTypes = new List<CardType>();
+        private readonly List<AtomType> _atomTypes = new List<AtomType>();
 
         /// <summary>
         /// Attaches a markup section to the document.
@@ -54,6 +54,21 @@ namespace MobileDocRenderer
             sectionBuilder(listSectionBuilder);
             
             _sections.Add(listSectionBuilder.Build());
+
+            return this;
+        }
+        
+        /// <summary>
+        /// Adds a new image section to the document.
+        /// </summary>
+        /// <param name="sectionBuilder">Action to build the new image section.</param>
+        /// <returns>Returns the mobiledoc builder instance.</returns>
+        public MobileDocBuilder WithImageSection(Action<ImageSectionBuilder> sectionBuilder)
+        {
+            var imageSectionBuilder = new ImageSectionBuilder();
+            sectionBuilder(imageSectionBuilder);
+            
+            _sections.Add(imageSectionBuilder.Build());
 
             return this;
         }
@@ -109,9 +124,7 @@ namespace MobileDocRenderer
         /// <returns></returns>
         public MobileDoc Build()
         {
-            return new MobileDoc("0.3.0", _atomTypes, _cardTypes, _markups, _sections);
+            return new MobileDoc("0.3.2", _atomTypes, _cardTypes, _markups, _sections);
         }
-
-        
     }
 }

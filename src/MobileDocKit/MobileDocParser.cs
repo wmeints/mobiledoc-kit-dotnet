@@ -32,7 +32,8 @@ namespace MobileDocRenderer
             {
                 new MarkupSectionParser(),
                 new CardSectionParser(),
-                new ListSectionParser() 
+                new ListSectionParser(),
+                new ImageSectionParser()
             };
 
             _jsonReader = new JsonTextReader(new StringReader(text));

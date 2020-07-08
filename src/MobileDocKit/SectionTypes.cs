@@ -11,6 +11,11 @@
         public const int Markup = 1;
         
         /// <summary>
+        /// Image section
+        /// </summary>
+        public const int Image = 2;
+        
+        /// <summary>
         /// List section.
         /// </summary>
         public const int List = 3;
@@ -19,6 +24,7 @@
         /// Card section.
         /// </summary>
         public const int Card = 10;
+
         
     }
 }

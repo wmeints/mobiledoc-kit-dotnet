@@ -25,7 +25,8 @@ namespace MobileDocRenderer
             {
                 new MarkupSectionJsonTranslator(jsonWriter),
                 new CardSectionJsonTranslator(jsonWriter),
-                new ListSectionJsonTranslator(jsonWriter), 
+                new ListSectionJsonTranslator(jsonWriter),
+                new ImageSectionJsonTranslator(jsonWriter), 
             };
             
             var walker = new MobileDocWalker();
