@@ -3,36 +3,35 @@
 namespace MobileDocRenderer
 {
     /// <summary>
-    /// Defines a markup section
+    /// Defines a list section in a mobiledoc document
     /// </summary>
-    public class MarkupSection: Section
+    public class ListSection: Section
     {
         /// <summary>
-        /// Initializes a new instance of <see cref="MarkupSection"/>
+        /// Initializes a new instance of <see cref="ListSection"/>
         /// </summary>
-        /// <param name="tagName">Tag name</param>
+        /// <param name="listType"></param>
         /// <param name="markers">Markers for the section</param>
         /// <param name="attributes">Attributes for the section</param>
-        public MarkupSection(string tagName, IEnumerable<Marker> markers, 
-            IEnumerable<Attribute> attributes): base(1)
+        public ListSection(string listType, IEnumerable<Marker> markers, IEnumerable<Attribute> attributes):base(SectionTypes.List)
         {
-            TagName = tagName;
+            ListType = listType;
             Markers = markers;
             Attributes = attributes;
         }
 
         /// <summary>
-        /// Gets the tag name to wrap the section in
+        /// Gets the list type to render.
         /// </summary>
-        public string TagName { get; }
-        
+        public string ListType { get; }
+
         /// <summary>
-        /// Gets the markers for the section
+        /// Gets the markers for the list section
         /// </summary>
         public IEnumerable<Marker> Markers { get; }
         
         /// <summary>
-        /// Gets the attributes for the wrapper element
+        /// Gets the attributes for the list section
         /// </summary>
         public IEnumerable<Attribute> Attributes { get; }
     }

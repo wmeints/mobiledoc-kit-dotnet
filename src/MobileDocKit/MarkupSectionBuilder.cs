@@ -9,7 +9,7 @@ namespace MobileDocRenderer
     {
         private string _tagName;
         private List<Marker> _markers = new List<Marker>();
-        private List<MarkupSectionAttribute> _attributes = new List<MarkupSectionAttribute>();
+        private List<Attribute> _attributes = new List<Attribute>();
 
         /// <summary>
         /// Defines the tag name for the section
@@ -53,7 +53,7 @@ namespace MobileDocRenderer
         /// <returns></returns>
         public MarkupSectionBuilder WithAttribute(string name, string value)
         {
-            _attributes.Add(new MarkupSectionAttribute(name, value));
+            _attributes.Add(new Attribute(name, value));
 
             return this;
         }

@@ -42,6 +42,21 @@ namespace MobileDocRenderer
 
             return this;
         }
+        
+        /// <summary>
+        /// Adds a new list section to the document.
+        /// </summary>
+        /// <param name="sectionBuilder">Action to build the list section.</param>
+        /// <returns>Returns the mobile doc builder instance.</returns>
+        public MobileDocBuilder WithListSection(Action<ListSectionBuilder> sectionBuilder)
+        {
+            ListSectionBuilder listSectionBuilder = new ListSectionBuilder();
+            sectionBuilder(listSectionBuilder);
+            
+            _sections.Add(listSectionBuilder.Build());
+
+            return this;
+        }
 
         /// <summary>
         /// Attaches a new markup to the document.
@@ -96,5 +111,7 @@ namespace MobileDocRenderer
         {
             return new MobileDoc("0.3.0", _atomTypes, _cardTypes, _markups, _sections);
         }
+
+        
     }
 }

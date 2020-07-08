@@ -8,7 +8,7 @@ namespace MobileDocRenderer
     public class MarkupTypeBuilder
     {
         private string _tagName;
-        private List<MarkupAttribute> _attributes = new List<MarkupAttribute>();
+        private List<Attribute> _attributes = new List<Attribute>();
 
         /// <summary>
         /// Defines a new attribute for the markup.
@@ -18,7 +18,7 @@ namespace MobileDocRenderer
         /// <returns>Returns the markup type builder.</returns>
         public MarkupTypeBuilder WithAttribute(string name, string value)
         {
-            _attributes.Add(new MarkupAttribute(name,value));
+            _attributes.Add(new Attribute(name,value));
             
             return this;
         }

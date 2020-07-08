@@ -5,14 +5,14 @@ using Newtonsoft.Json;
 namespace MobileDocRenderer
 {
     /// <summary>
-    /// Parses markup sections
+    /// Parses list sections.
     /// </summary>
-    public class MarkupSectionParser : SectionParser
+    public class ListSectionParser: SectionParser
     {
         /// <summary>
         /// Gets the section type that is supported by the parser.
         /// </summary>
-        public override int SectionType => SectionTypes.Markup;
+        public override int SectionType => SectionTypes.List;
 
         /// <summary>
         /// Parses the JSON element into a specific section
@@ -30,7 +30,7 @@ namespace MobileDocRenderer
                 return new MarkupSection(tagName, markers, attributes);
             }
 
-            return new MarkupSection(tagName, markers, Enumerable.Empty<Attribute>());
+            return new ListSection(tagName, markers, Enumerable.Empty<Attribute>());
         }
 
         private IEnumerable<Attribute> ParseAttributes(JsonReader jsonReader)

@@ -158,5 +158,22 @@ namespace MobileDocRenderer.Tests
             result.Cards.Should().NotBeEmpty();
             result.Cards.First().Name.Should().Be("markdown");
         }
+
+        [Fact]
+        public void CanParseListSections()
+        {
+            var document = new MobileDocBuilder()
+                .WithListSection(section => section
+                    .WithListType("ol")
+                    .WithMarkupMarker(new int[] { }, 0, "Item 1")
+                    .WithAtomMarker(new int[] { }, 0, 0))
+                .Build();
+            
+            var parser = new MobileDocParser(MobileDocSerializer.Serialize(document));
+            var result = parser.MobileDoc();
+
+            result.Sections.Should().ContainSingle(x => x.SectionType == 3);
+            result.Sections.First().As<ListSection>().Markers.Should().NotBeEmpty();
+        }
     }
 }

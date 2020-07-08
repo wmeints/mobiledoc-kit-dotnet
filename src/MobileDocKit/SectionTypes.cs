@@ -9,7 +9,16 @@
         /// Markup section.
         /// </summary>
         public const int Markup = 1;
-
-        public static int Card = 10;
+        
+        /// <summary>
+        /// List section.
+        /// </summary>
+        public const int List = 3;
+        
+        /// <summary>
+        /// Card section.
+        /// </summary>
+        public const int Card = 10;
+        
     }
 }

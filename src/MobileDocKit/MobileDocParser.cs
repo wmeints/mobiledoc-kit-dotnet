@@ -31,7 +31,8 @@ namespace MobileDocRenderer
             _sectionParsers = new SectionParser[]
             {
                 new MarkupSectionParser(),
-                new CardSectionParser()
+                new CardSectionParser(),
+                new ListSectionParser() 
             };
 
             _jsonReader = new JsonTextReader(new StringReader(text));
@@ -79,7 +80,10 @@ namespace MobileDocRenderer
                 if (_jsonReader.TokenType == JsonToken.PropertyName && (string)_jsonReader.Value == "cards")
                 {
                     ParseCards();
+                    continue;
                 }
+                
+                throw new Exception($"Invalid token type {_jsonReader.TokenType} detected: {_jsonReader.Value}");
             }
 
             return new MobileDoc(_version, _atoms, _cards, _markups, _sections);
@@ -166,7 +170,7 @@ namespace MobileDocRenderer
             _jsonReader.Match(JsonToken.StartArray);
 
             var tagName = (string)_jsonReader.Match(JsonToken.String);
-            var attributes = new List<MarkupAttribute>();
+            var attributes = new List<Attribute>();
 
             if (_jsonReader.TokenType == JsonToken.StartArray)
             {
@@ -177,7 +181,7 @@ namespace MobileDocRenderer
                     var attributeName = (string)_jsonReader.Match(JsonToken.String);
                     var attributeValue = (string)_jsonReader.Match(JsonToken.String);
 
-                    attributes.Add(new MarkupAttribute(attributeName, attributeValue));
+                    attributes.Add(new Attribute(attributeName, attributeValue));
                 }
 
                 _jsonReader.Match(JsonToken.EndArray);
@@ -214,7 +218,7 @@ namespace MobileDocRenderer
 
             if (sectionContentParser == null)
             {
-                throw new Exception($"No section parser defined for section type {_jsonReader.Value}");
+                throw new Exception($"No section parser defined for section type {sectionType}");
             }
 
             _sections.Add(sectionContentParser.Parse(_jsonReader));

@@ -12,7 +12,7 @@ namespace MobileDocRenderer
         /// </summary>
         /// <param name="name">Name of the markup type.</param>
         /// <param name="attributes">Attributes for the markup type.</param>
-        public MarkupType(string name, IEnumerable<MarkupAttribute> attributes)
+        public MarkupType(string name, IEnumerable<Attribute> attributes)
         {
             Name = name;
             Attributes = attributes;
@@ -26,6 +26,6 @@ namespace MobileDocRenderer
         /// <summary>
         /// Gets the attributes associated with the markup type. 
         /// </summary>
-        public IEnumerable<MarkupAttribute> Attributes { get; }
+        public IEnumerable<Attribute> Attributes { get; }
     }
 }
