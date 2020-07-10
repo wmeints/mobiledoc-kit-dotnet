@@ -166,8 +166,9 @@ namespace MobileDocRenderer.Tests
             var document = new MobileDocBuilder()
                 .WithListSection(section => section
                     .WithListType("ol")
-                    .WithMarkupMarker(new int[] {0}, 1, "Item 1")
-                    .WithAtomMarker(new int[] { }, 0, 0)
+                    .WithListItem(item => item
+                        .WithMarkupMarker(new int[] { }, 0, "Item 1")
+                        .WithAtomMarker(new int[] { }, 0, 0))
                     .WithAttribute("class", "test"))
                 .Build();
 
@@ -175,7 +176,7 @@ namespace MobileDocRenderer.Tests
             var result = parser.MobileDoc();
 
             result.Sections.Should().ContainSingle(x => x.SectionType == SectionTypes.List);
-            result.Sections.First().As<ListSection>().Markers.Should().NotBeEmpty();
+            result.Sections.First().As<ListSection>().ListItems.Should().NotBeEmpty();
         }
 
         [Fact]

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace MobileDocRenderer
 {
@@ -7,34 +8,21 @@ namespace MobileDocRenderer
     /// </summary>
     public class ListSectionBuilder
     {
-        private readonly List<Marker> _markers = new List<Marker>();
+        private readonly List<IEnumerable<Marker>> _listItems = new List<IEnumerable<Marker>>();
         private readonly List<Attribute> _attributes = new List<Attribute>();
         private string _listType;
 
         /// <summary>
-        /// Defines a marker for the section
+        /// Adds an item to the list
         /// </summary>
-        /// <param name="openedMarkupTypes">Indices of the opened markup types </param>
-        /// <param name="closedMarkups">Number of closed markup types.</param>
-        /// <param name="text">Text to render.</param>
+        /// <param name="itemBuilder">Action used to build the list item</param>
         /// <returns>Returns the list section builder instance.</returns>
-        public ListSectionBuilder WithMarkupMarker(int[] openedMarkupTypes, int closedMarkups, string text)
+        public ListSectionBuilder WithListItem(Action<ListItemBuilder> itemBuilder)
         {
-            _markers.Add(new MarkupMarker(openedMarkupTypes, closedMarkups,text));
+            var listItemBuilder = new ListItemBuilder();
+            itemBuilder(listItemBuilder);
             
-            return this;
-        }
-
-        /// <summary>
-        /// Defines an atom marker for the section
-        /// </summary>
-        /// <param name="openedMarkupTypes">Indices of the opened markup types.</param>
-        /// <param name="closedMarkups">Number of closed markup types at the end of the marker.</param>
-        /// <param name="atomIndex">Index of the atom to render.</param>
-        /// <returns>Returns the list section builder instance.</returns>
-        public ListSectionBuilder WithAtomMarker(int[] openedMarkupTypes, int closedMarkups, int atomIndex)
-        {
-            _markers.Add(new AtomMarker(openedMarkupTypes, closedMarkups,atomIndex));
+            _listItems.Add(listItemBuilder.Build());
             
             return this;
         }
@@ -70,7 +58,7 @@ namespace MobileDocRenderer
         /// <returns>Returns the new list section instance.</returns>
         public ListSection Build()
         {
-            return new ListSection(_listType, _markers, _attributes);
+            return new ListSection(_listType, _listItems, _attributes);
         }
     }
 }

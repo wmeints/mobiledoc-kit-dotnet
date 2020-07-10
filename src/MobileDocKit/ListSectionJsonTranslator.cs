@@ -37,8 +37,15 @@ namespace MobileDocRenderer
             _jsonWriter.WriteValue(SectionTypes.List);
             _jsonWriter.WriteValue(listSection.ListType);
 
-            JsonTranslations.WriteMarkers(_jsonWriter, listSection.Markers);
+            _jsonWriter.WriteStartArray();
 
+            foreach (var markers in listSection.ListItems)
+            {
+                JsonTranslations.WriteMarkers(_jsonWriter, markers);    
+            }
+            
+            _jsonWriter.WriteEndArray();
+            
             if (listSection.Attributes.Any())
             {
                 JsonTranslations.WriteAttributes(_jsonWriter, listSection.Attributes);

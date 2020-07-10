@@ -22,15 +22,25 @@ namespace MobileDocRenderer
         public override Section Parse(JsonReader jsonReader)
         {
             var tagName = (string)jsonReader.Match(JsonToken.String);
-            var markers = ParseMarkers(jsonReader);
+            var listItems = new List<IEnumerable<Marker>>();
+
+            jsonReader.Match(JsonToken.StartArray);
+            
+            while (jsonReader.TokenType != JsonToken.EndArray)
+            {
+                var markers = ParseMarkers(jsonReader);
+                listItems.Add(markers);
+            }
+
+            jsonReader.Match(JsonToken.EndArray);
 
             if (jsonReader.TokenType == JsonToken.StartArray)
             {
                 var attributes = ParseAttributes(jsonReader);
-                return new ListSection(tagName, markers, attributes);
+                return new ListSection(tagName, listItems, attributes);
             }
 
-            return new ListSection(tagName, markers, Enumerable.Empty<Attribute>());
+            return new ListSection(tagName, listItems, Enumerable.Empty<Attribute>());
         }
 
         private IEnumerable<Attribute> ParseAttributes(JsonReader jsonReader)

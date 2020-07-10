@@ -11,12 +11,13 @@ namespace MobileDocRenderer
         /// Initializes a new instance of <see cref="ListSection"/>
         /// </summary>
         /// <param name="listType"></param>
-        /// <param name="markers">Markers for the section</param>
+        /// <param name="listItems">Markers for the section</param>
         /// <param name="attributes">Attributes for the section</param>
-        public ListSection(string listType, IEnumerable<Marker> markers, IEnumerable<Attribute> attributes):base(SectionTypes.List)
+        public ListSection(string listType, IEnumerable<IEnumerable<Marker>> listItems, 
+            IEnumerable<Attribute> attributes):base(SectionTypes.List)
         {
             ListType = listType;
-            Markers = markers;
+            ListItems = listItems;
             Attributes = attributes;
         }
 
@@ -28,7 +29,7 @@ namespace MobileDocRenderer
         /// <summary>
         /// Gets the markers for the list section
         /// </summary>
-        public IEnumerable<Marker> Markers { get; }
+        public IEnumerable<IEnumerable<Marker>> ListItems { get; }
         
         /// <summary>
         /// Gets the attributes for the list section
