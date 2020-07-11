@@ -46,6 +46,16 @@ var document = new MobileDocBuilder()
     .Build();
 ```
 
+Finally, if you want to render mobiledoc to HTML, use the MobileDocRenderer:
+
+```csharp
+var renderer = new MobileDocRenderer(new CardSectionRenderer[] { }, new AtomRenderer[] { });
+var htmlContent = renderer.Render(mobileDocInstance);
+```
+
+Make sure to write your own card renderers and atom renderers for any custom cards and atoms that you're using in your documents.
+Add them to the parameters, specified in the constructor of the `MobileDocRenderer`.
+
 ## Learning more about mobiledoc
 
 You can learn more about the mobiledoc format in 

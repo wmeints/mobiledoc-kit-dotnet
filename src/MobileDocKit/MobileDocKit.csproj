@@ -6,6 +6,11 @@
   </PropertyGroup>
 
   <PropertyGroup>
+      <IncludeSymbols>true</IncludeSymbols>
+      <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+  </PropertyGroup>
+
+  <PropertyGroup>
     <PackageId>MobileDocKit</PackageId>
     <Version>0.2.2</Version>
     <Authors>Willem Meints</Authors>
@@ -13,6 +18,8 @@
     <RepositoryUrl>https://github.com/wmeints/mobiledoc-kit-dotnet.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageTags>mobiledoc;html;parser;renderer</PackageTags>
+    <PackageProjectUrl>https://github.com/wmeints/mobiledoc-kit-dotnet/</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>
@@ -22,7 +29,7 @@
 
   <Target Name="GenerateReleaseNotes" BeforeTargets="GenerateNuspec">
     <ReadLinesFromFile File="../../CHANGELOG">
-      <Output TaskParameter="Lines" ItemName="ReleaseNoteItems"/>
+      <Output TaskParameter="Lines" ItemName="ReleaseNoteItems" />
     </ReadLinesFromFile>
     <PropertyGroup>
       <PackageReleaseNotes>@(ReleaseNoteItems, '%0a')</PackageReleaseNotes>
