@@ -56,21 +56,25 @@ namespace MobileDocRenderer
             
             listener.EnterSections(mobileDoc.Sections);
 
-            foreach (var section in mobileDoc.Sections)
+            if (sectionListeners.Any())
             {
-                var sectionListener = sectionListeners.FirstOrDefault(
-                    x => x.SectionType == section.SectionType);
+                foreach (var section in mobileDoc.Sections)
+                {
+                    var sectionListener = sectionListeners.FirstOrDefault(
+                        x => x.SectionType == section.SectionType);
 
-                if (sectionListener != null)
-                {
-                    sectionListener.EnterSection(section);
-                    sectionListener.ExitSection(section);
-                }
-                else if (!skipUnsupportedSectionTypes)
-                {
-                    throw new Exception("Unsupported section encountered.");
-                }
+                    if (sectionListener != null)
+                    {
+                        sectionListener.EnterSection(section);
+                        sectionListener.ExitSection(section);
+                    }
+                    else if (!skipUnsupportedSectionTypes)
+                    {
+                        throw new Exception("Unsupported section encountered.");
+                    }
+                }    
             }
+            
 
             listener.ExitSections(mobileDoc.Sections);
             listener.ExitMobileDoc(mobileDoc);
