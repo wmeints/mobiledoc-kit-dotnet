@@ -12,12 +12,9 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Extract version number
-      id: determineVersionNumber
-      uses: actions/github-script@0.2.0
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        script: |
-          return context.payload.ref.replace(/refs\/tags\/v/, '')
+      id: branch_name
+      run: |
+        echo ::set-output name=SOURCE_TAG::${GITHUB_REF#refs/tags/}
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
@@ -25,7 +22,7 @@ jobs:
     - name: Install dependencies
       run: dotnet restore src/MobileDocKit.sln
     - name: Package
-      run: dotnet pack src/MobileDocKit/MobileDocKit.csproj -c Release -o packages/ /p:Version=${{ steps.determineVersionNumber.outputs.result }}
+      run: dotnet pack src/MobileDocKit/MobileDocKit.csproj -c Release -o packages/ /p:Version=${{ steps.branch_name.outputs.SOURCE_TAG }}
     - name: Publish package
       run: |
         dotnet nuget add source https://nuget.pkg.github.com/wmeints/index.json -n github -u wmeints -p ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text
