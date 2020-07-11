@@ -20,7 +20,7 @@ jobs:
       with:
         dotnet-version: 3.1.300
     - name: Determine version number
-      run: echo ::set-env name=VERSION_NUMBER::$(${GITHUB_REF#refs/tags/} | sed 's/[v]//g')
+      run: echo ::set-env name=VERSION_NUMBER::$(echo ${GITHUB_REF#refs/tags/} | sed 's/[v]//g')
     - name: Install dependencies
       run: dotnet restore src/MobileDocKit.sln
     - name: Package
