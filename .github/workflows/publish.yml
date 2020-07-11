@@ -1,0 +1,30 @@
+name: Publish package
+
+on:
+  push:
+    tags: 
+      - v*.*.*
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Extract version number
+      id: branch_name
+      run: |
+        echo ::set-output name=SOURCE_TAG::${GITHUB_REF#refs/tags/}
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.300
+    - name: Install dependencies
+      run: dotnet restore src/MobileDocKit.sln
+      run: echo ::set-env name=VERSION_NUMBER::$(${GITHUB_REF#refs/tags/} | sed 's/[v]//g')
+    - name: Package
+      run: dotnet pack src/MobileDocKit/MobileDocKit.csproj -c Release -o packages/ /p:Version=${{ $env.VERSION_NUMBER }}
+    - name: Publish package
+      run: |
+        dotnet nuget add source https://nuget.pkg.github.com/wmeints/index.json -n github -u wmeints -p ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text
+        dotnet nuget push "packages/*.nupkg" --source "github" -k ${{ secrets.GITHUB_TOKEN }} --skip-duplicate
