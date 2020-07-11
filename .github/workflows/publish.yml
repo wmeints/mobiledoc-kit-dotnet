@@ -23,7 +23,7 @@ jobs:
       run: dotnet restore src/MobileDocKit.sln
       run: echo ::set-env name=VERSION_NUMBER::$(${GITHUB_REF#refs/tags/} | sed 's/[v]//g')
     - name: Package
-      run: dotnet pack src/MobileDocKit/MobileDocKit.csproj -c Release -o packages/ /p:Version=${{ $env.VERSION_NUMBER }}
+      run: dotnet pack src/MobileDocKit/MobileDocKit.csproj -c Release -o packages/ /p:Version=${{ env.VERSION_NUMBER }}
     - name: Publish package
       run: |
         dotnet nuget add source https://nuget.pkg.github.com/wmeints/index.json -n github -u wmeints -p ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text
