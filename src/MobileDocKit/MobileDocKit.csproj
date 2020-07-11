@@ -7,10 +7,12 @@
 
   <PropertyGroup>
     <PackageId>MobileDocKit</PackageId>
-    <Version>0.1.0</Version>
+    <Version>0.2.2</Version>
     <Authors>Willem Meints</Authors>
     <PackageDescription>Mobiledoc parser/rendering library for .NET Core.</PackageDescription>
-    <RepositoryUrl>https://github.com/wmeints/mobiledoc-kit-dotnet/</RepositoryUrl>
+    <RepositoryUrl>https://github.com/wmeints/mobiledoc-kit-dotnet.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>
@@ -18,4 +20,12 @@
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
 
+  <Target Name="GenerateReleaseNotes" BeforeTargets="GenerateNuspec">
+    <ReadLinesFromFile File="../../CHANGELOG">
+      <Output TaskParameter="Lines" ItemName="ReleaseNoteItems"/>
+    </ReadLinesFromFile>
+    <PropertyGroup>
+      <PackageReleaseNotes>@(ReleaseNoteItems, '%0a')</PackageReleaseNotes>
+    </PropertyGroup>
+  </Target>
 </Project>

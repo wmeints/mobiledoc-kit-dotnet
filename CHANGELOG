@@ -1,0 +1,9 @@
+v0.2.2
+
+* New: Added support for rendering HTML from mobiledoc.
+* Fixed: Changed list parsing behavior, so it supports actual list items.
+
+v0.1.0
+
+* New: Added support for generating mobiledoc instances from code.
+* New: Added support for parsing mobiledoc content.
