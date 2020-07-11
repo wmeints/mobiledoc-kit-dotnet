@@ -19,9 +19,10 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.300
+    - name: Determine version number
+      run: echo ::set-env name=VERSION_NUMBER::$(${GITHUB_REF#refs/tags/} | sed 's/[v]//g')
     - name: Install dependencies
       run: dotnet restore src/MobileDocKit.sln
-      run: echo ::set-env name=VERSION_NUMBER::$(${GITHUB_REF#refs/tags/} | sed 's/[v]//g')
     - name: Package
       run: dotnet pack src/MobileDocKit/MobileDocKit.csproj -c Release -o packages/ /p:Version=${{ env.VERSION_NUMBER }}
     - name: Publish package
